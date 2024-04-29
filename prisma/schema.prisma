@@ -13,36 +13,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id        String    @id @default(uuid())
-  userId    String
-  expenses  Expense[]
-  incomes   Income[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-}
-
 model Income {
   id          String   @id @default(uuid())
   amount      Int
   description String?
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Account     Account? @relation(fields: [accountId], references: [id])
-  accountId   String?
 }
 
 model Expense {
   id          String   @id @default(uuid())
   amount      Int
   description String?
-  category    String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Account     Account? @relation(fields: [accountId], references: [id])
-  accountId   String?
 }
 
 model Category {
-  id String @id @default(uuid())
+  id        String    @id @default(uuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Expense   Expense[]
+  Income    Income[]
 }

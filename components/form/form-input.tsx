@@ -6,7 +6,7 @@ import { forwardRef } from "react";
 interface Props {
   id: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
 }
 export const FormInput = forwardRef<HTMLInputElement, Props>(
@@ -19,7 +19,6 @@ export const FormInput = forwardRef<HTMLInputElement, Props>(
           name={id}
           placeholder={`${placeholder}...`}
           className={cn("p-2", className)}
-          type="text"
           ref={ref}
         />
       </div>
