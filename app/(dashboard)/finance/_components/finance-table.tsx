@@ -1,7 +1,11 @@
+import { deleteExpense } from "@/actions/delete-expense/delete-expense";
+import { deleteIncome } from "@/actions/delete-income/delete-income";
+import { FormSubmit } from "@/components/form/form-submit";
+import { Modal } from "@/components/modal/modal";
+
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -22,19 +26,31 @@ export const FinanceTable = async () => {
     },
   });
 
-  // console.log({ expenses, incomes });
+  const expenseSum = await db.expense.aggregate({
+    _sum: {
+      amount: true,
+    },
+  });
 
-  console.log(new Date(incomes[1].createdAt).toLocaleDateString("en-GB"));
+  const incomeSum = await db.income.aggregate({
+    _sum: {
+      amount: true,
+    },
+  });
 
   return (
     <div>
-      <Table className="w-[500px]">
+      <h1 className="font-bold text-2xl ml-4 text-green-600">
+        Prihod: {expenseSum._sum.amount}
+      </h1>
+      <Table className="w-[800px] mb-8">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Kategorija</TableHead>
-            <TableHead>Opis</TableHead>
+            <TableHead className="w-[250px]">Opis</TableHead>
             <TableHead>Datum</TableHead>
-            <TableHead className="text-right">Vrednost</TableHead>
+            <TableHead>Vrednost</TableHead>
+            <TableHead className="text-center">Akcije</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -47,18 +63,29 @@ export const FinanceTable = async () => {
               <TableCell>
                 {expense.createdAt.toLocaleDateString("en-GB")}
               </TableCell>
-              <TableCell className="text-right">{expense.amount}</TableCell>
+              <TableCell>{expense.amount}</TableCell>
+              <TableCell className="text-center">
+                <form action={deleteExpense}>
+                  <input hidden name="id" id="id" value={expense.id} />
+                  <FormSubmit variant="destructive">Izbrisi</FormSubmit>
+                </form>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Table className="w-[500px]">
+      <Modal />
+      <h1 className="font-bold text-2xl ml-4 text-red-600">
+        Troskovi: {incomeSum._sum.amount}
+      </h1>
+      <Table className="w-[800px]">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Kategorija</TableHead>
-            <TableHead>Opis</TableHead>
+            <TableHead className="w-[250px]">Opis</TableHead>
             <TableHead>Datum</TableHead>
-            <TableHead className="text-right">Vrednost</TableHead>
+            <TableHead>Vrednost</TableHead>
+            <TableHead className="text-center">Akcije</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -71,11 +98,18 @@ export const FinanceTable = async () => {
               <TableCell>
                 {income.createdAt.toLocaleDateString("en-GB")}
               </TableCell>
-              <TableCell className="text-right">{income.amount}</TableCell>
+              <TableCell>{income.amount}</TableCell>
+              <TableCell className="text-center">
+                <form action={deleteIncome}>
+                  <input hidden name="id" id="id" value={income.id} />
+                  <FormSubmit variant="destructive">Izbrisi</FormSubmit>
+                </form>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Modal />
     </div>
   );
 };

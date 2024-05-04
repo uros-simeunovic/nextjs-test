@@ -6,9 +6,9 @@ export const CreateExpense = z.object({
       required_error: "Polje iznos je obavezno",
       invalid_type_error: "Polje iznos je obavezno",
     })
-    .positive(),
+    .positive({ message: "Broj mora biti pozitivan" }),
   description: z.string().optional(),
   categoryId: z.string(),
 });
 
-export type expenseInput = z.infer<typeof CreateExpense>;
+export type expense = z.infer<typeof CreateExpense>;

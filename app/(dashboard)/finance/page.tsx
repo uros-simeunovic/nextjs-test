@@ -4,7 +4,7 @@ import { FinanceTable } from "./_components/finance-table";
 const FinancePage = () => {
   return (
     <>
-      <FormFinance />
+      {/* <FormFinance /> */}
       <FinanceTable />
     </>
   );
