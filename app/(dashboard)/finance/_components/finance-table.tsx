@@ -1,3 +1,5 @@
+"use server";
+
 import { deleteExpense } from "@/actions/delete-expense/delete-expense";
 import { deleteIncome } from "@/actions/delete-income/delete-income";
 import { FormSubmit } from "@/components/form/form-submit";
@@ -12,6 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { db } from "@/lib/db";
+import { total } from "@/lib/total";
 
 export const FinanceTable = async () => {
   const expenses = await db.expense.findMany({
@@ -40,8 +43,8 @@ export const FinanceTable = async () => {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl ml-4 text-green-600">
-        Prihod: {expenseSum._sum.amount}
+      <h1 className="font-bold text-2xl ml-4 text-red-600">
+        Trosak: {expenseSum._sum.amount}
       </h1>
       <Table className="w-[800px] mb-8">
         <TableHeader>
@@ -66,7 +69,13 @@ export const FinanceTable = async () => {
               <TableCell>{expense.amount}</TableCell>
               <TableCell className="text-center">
                 <form action={deleteExpense}>
-                  <input hidden name="id" id="id" value={expense.id} />
+                  <input
+                    hidden
+                    name="id"
+                    id="id"
+                    // value={expense.id}
+                    defaultValue={expense.id}
+                  />
                   <FormSubmit variant="destructive">Izbrisi</FormSubmit>
                 </form>
               </TableCell>
@@ -75,8 +84,8 @@ export const FinanceTable = async () => {
         </TableBody>
       </Table>
       <Modal />
-      <h1 className="font-bold text-2xl ml-4 text-red-600">
-        Troskovi: {incomeSum._sum.amount}
+      <h1 className="font-bold text-2xl ml-4 text-green-600">
+        Prihod: {incomeSum._sum.amount}
       </h1>
       <Table className="w-[800px]">
         <TableHeader>
@@ -110,6 +119,9 @@ export const FinanceTable = async () => {
         </TableBody>
       </Table>
       <Modal />
+      <h1 className="font-bold text-2xl ml-4">
+        Ukupno: {total(incomeSum._sum.amount!, expenseSum._sum.amount!)}
+      </h1>
     </div>
   );
 };

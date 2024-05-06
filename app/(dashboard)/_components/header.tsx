@@ -3,7 +3,7 @@ import { SignedIn, UserButton } from "@clerk/nextjs";
 
 export const Header = () => {
   return (
-    <header className="h-20 border-b-1 w-full m-auto bg-slate-400 rounded-b-xl">
+    <header className="h-20 w-full m-auto shadow-md rounded-b-xl bg-orange-300">
       <div className="w-full h-full max-w-[600px] md:max-w-[1400px] m-auto flex items-center justify-between">
         <Logo />
         <SignedIn>

@@ -5,7 +5,7 @@ import { FormFinance } from "@/app/(dashboard)/finance/_components/form-finance"
 export const Modal = () => {
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button>Open</Button>
       </DialogTrigger>
       <DialogContent>

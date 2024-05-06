@@ -2,7 +2,6 @@ import { createExpense } from "@/actions/create-expense/create-expense";
 import { SelectCategory } from "./select-category";
 import { FormSubmit } from "@/components/form/form-submit";
 import { FormInput } from "@/components/form/form-input";
-import { FormFinanceInput } from "@/components/form/form-finance-input";
 
 export const FormFinance = async () => {
   return (
