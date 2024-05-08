@@ -1,16 +1,12 @@
-import { FormFinance } from "./_components/form-finance";
-import { FinanceTable } from "./_components/finance-table";
-import { Expense } from "./_components/expense";
-import { Income } from "./_components/income";
+"use client";
 
-const FinancePage = () => {
+import { Dashboard } from "./_components/dashboard";
+
+const FinancePage = async () => {
   return (
-    <>
-      {/* <FormFinance /> */}
-      {/* <FinanceTable /> */}
-      <Expense />
-      <Income />
-    </>
+    <div>
+      <Dashboard />
+    </div>
   );
 };
 

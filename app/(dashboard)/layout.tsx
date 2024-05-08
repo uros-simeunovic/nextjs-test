@@ -4,12 +4,14 @@ import { Sidebar } from "./_components/sidebar";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full w-full">
-      <Header />
-      <div className="flex gap-x-7 h-full mt-6 p-4">
-        <div className="w-64 h-[80%] shrink-0 hidden md:block">
+      <div className="flex flex-row h-full">
+        <div className="w-64 shrink-0 hidden md:block">
           <Sidebar />
         </div>
-        {children}
+        <div className="w-full">
+          <Header />
+          <div className="p-8 w-full">{children}</div>
+        </div>
       </div>
     </div>
   );

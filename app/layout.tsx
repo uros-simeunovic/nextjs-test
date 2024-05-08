@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const font = Nunito({ subsets: ["latin"] });
+const font = Lato({
+  weight: ["100", "300", "400", "700", "900"],
+  style: ["normal"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Fine Ans",
