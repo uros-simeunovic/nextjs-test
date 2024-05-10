@@ -21,7 +21,7 @@ export const Dashboard = () => {
 
     const incomeSum: number | undefined = await getIncomesSum(dateRange);
 
-    if (expenseSum) {
+    if (expenseSum && incomeSum) {
       setExpenseSum(expenseSum);
       setIncomeSum(incomeSum);
     }
