@@ -1,12 +1,11 @@
-"use client";
-
 import { Dashboard } from "./_components/dashboard";
+import { Expense } from "./_components/card";
 
 const FinancePage = async () => {
   return (
-    <div>
+    <main>
       <Dashboard />
-    </div>
+    </main>
   );
 };
 

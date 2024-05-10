@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Provider } from "@/lib/provider";
 
 const font = Lato({
   weight: ["100", "300", "400", "700", "900"],

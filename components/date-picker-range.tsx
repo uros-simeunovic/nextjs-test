@@ -14,29 +14,18 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useDate } from "@/hooks/use-date";
-import { useSearchParams } from "next/navigation";
 
 interface DatePickerWithRangeProps {
   className?: string;
+  onSelect: (dateRange: DateRange | undefined) => void;
+  date: DateRange | undefined;
 }
 
-export function DatePickerWithRange({ className }: DatePickerWithRangeProps) {
-  const { date, setDate } = useDate();
-  const searchParams = useSearchParams();
-
-  const onDateSelect = async (dateRange: DateRange | undefined) => {
-    console.log(dateRange);
-
-    const response = await fetch(
-      `/api/finances/?from="${dateRange?.from}"&to="${dateRange?.to}"`,
-      {
-        method: "GET",
-      }
-    );
-
-    setDate(dateRange);
-  };
-
+export function DatePickerWithRange({
+  className,
+  onSelect,
+  date,
+}: DatePickerWithRangeProps) {
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -70,7 +59,7 @@ export function DatePickerWithRange({ className }: DatePickerWithRangeProps) {
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={onDateSelect}
+            onSelect={onSelect}
             numberOfMonths={2}
           />
         </PopoverContent>

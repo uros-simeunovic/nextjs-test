@@ -13,7 +13,9 @@ export const FormInput = forwardRef<HTMLInputElement, Props>(
   ({ id, label, placeholder, className }, ref) => {
     return (
       <div>
-        <Label htmlFor={id}>{label}</Label>
+        <Label htmlFor={id} className="text-white">
+          {label}
+        </Label>
         <Input
           id={id}
           name={id}
