@@ -9,7 +9,7 @@ export const deleteExpense = async (formData: FormData) => {
   console.log(id);
 
   try {
-    const response = await db.expense.delete({
+    const response = await db.transaction.delete({
       where: {
         id,
       },

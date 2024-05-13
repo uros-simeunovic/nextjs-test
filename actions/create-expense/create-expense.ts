@@ -8,11 +8,13 @@ export const createExpense = async (formData: FormData) => {
   const amount = parseInt(formData.get("iznos") as string);
   const categoryId = formData.get("category") as string;
   const description = formData.get("description") as string;
+  const date = new Date("2024-05-06");
 
   const validatedExpense = CreateExpense.safeParse({
     amount,
     categoryId,
     description,
+    date,
   });
 
   if (!validatedExpense.success) {
@@ -21,11 +23,12 @@ export const createExpense = async (formData: FormData) => {
     };
   }
 
-  const response = await db.expense.create({
+  const response = await db.transaction.create({
     data: {
       amount,
       categoryId,
       description,
+      date,
     },
   });
 

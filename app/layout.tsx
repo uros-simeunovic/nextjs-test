@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Provider } from "@/lib/provider";
+import { QueryProvider } from "@/providers/query-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { SheetProvider } from "@/providers/sheet-provider";
 
 const font = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -25,7 +27,11 @@ export default function RootLayout({
       <html lang="en">
         <body className={font.className}>
           <main className="flex-1 flex flex-col items-center justify-center h-full">
-            {children}
+            <QueryProvider>
+              <SheetProvider />
+              <Toaster />
+              {children}
+            </QueryProvider>
           </main>
         </body>
       </html>
