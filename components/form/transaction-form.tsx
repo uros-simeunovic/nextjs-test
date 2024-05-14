@@ -1,9 +1,26 @@
 import { FormValues, Transaction } from "@/types";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "../ui/label";
+import { SelectForm } from "./form-select";
 
 type Props = {
   id?: string;
@@ -70,6 +87,17 @@ export const TransactionForm = ({
                   placeholder="Opis transakcije..."
                   {...field}
                 />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Kategorija</FormLabel>
+              <FormControl>
+                <SelectForm categoryOptions={categoryOptions} field={field} />
               </FormControl>
             </FormItem>
           )}
